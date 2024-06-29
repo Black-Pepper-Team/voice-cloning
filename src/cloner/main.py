@@ -6,7 +6,7 @@ from typing import Any
 from TTS.api import TTS
 
 # Internal imports
-import voices
+from voices.voices import get_speaker_wav
 
 class VoiceCloner:
     DEFAULT_LANGUAGE = 'en'
@@ -32,7 +32,7 @@ class VoiceCloner:
         start_time = time.time() # Recoding how much tome it takes to clone the voice
         voice = self._tts.tts(
                 text=text,
-                speaker_wav=voices.SPEAKER_WAV,
+                speaker_wav=get_speaker_wav(),
                 language=VoiceCloner.DEFAULT_LANGUAGE
             )
         end_time = time.time()
@@ -56,10 +56,10 @@ class VoiceCloner:
         """
         
         start_time = time.time() # Recoding how much tome it takes to clone the voice
-        voice = self._tts.tts(
+        voice = self._tts.tts_to_file(
                 text=text,
                 file_path=str(path),
-                speaker_wav=voices.SPEAKER_WAV,
+                speaker_wav=get_speaker_wav(),
                 language=VoiceCloner.DEFAULT_LANGUAGE
             )
         end_time = time.time()
@@ -69,5 +69,4 @@ class VoiceCloner:
         logging.info(f"Voice cloned in {time_taken} seconds")
         
         return voice
-        
-        
+    
