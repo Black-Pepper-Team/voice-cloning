@@ -1,2 +1,3 @@
-# lele-cloning
-Repository for cloning voice
+# Voice cloning
+
+Repository for cloning the beautiful voices
