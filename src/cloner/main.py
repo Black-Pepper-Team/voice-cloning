@@ -4,6 +4,7 @@ import logging
 from pathlib import Path
 from typing import Any
 from TTS.api import TTS
+import os
 
 # Internal imports
 from voices.voices import get_speaker_wav
@@ -16,7 +17,7 @@ class VoiceCloner:
         Initializes the VoiceCloner class
         """
         
-        self._tts = TTS('xtts')
+        self._tts = TTS('xtts-v2')
     
     def clone_voice(self, text: str) -> Any:
         """
@@ -54,6 +55,9 @@ class VoiceCloner:
         Output:
         - None
         """
+        
+        if os.path.exists(str(path)):
+            os.remove(str(path))
         
         start_time = time.time() # Recoding how much tome it takes to clone the voice
         voice = self._tts.tts_to_file(
